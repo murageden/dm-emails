@@ -1,0 +1,6 @@
+[Unit]
+Description=My Gmail Checker Checks my Inbox Every 10 seconds
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/job.sh

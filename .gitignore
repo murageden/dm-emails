@@ -1,0 +1,34 @@
+
+# Ignore Python cache and virtual environment
+.pytest_cache/
+__pycache__/
+# Ignore system files
+.DS_Store
+Thumbs.db
+# Ignore logs and temporary files
+*.log
+*.tmp
+# Ignore virtual environment
+.venv/
+
+# Ignore IDE files
+.vscode/
+.idea/  
+# Ignore compiled Python files
+*.pyc
+*.pyo
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore system-specific files
+*.swp
+
+# Ignore any other files that should not be tracked
+*.bak
+*.old
+
+# Ignore the .env file if it exists
+.env    
+token.json
+credentials.json

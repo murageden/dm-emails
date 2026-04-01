@@ -1,0 +1,10 @@
+[Unit]
+Description=Checks my Gmail Inbox every 10 seconds
+
+[Timer]
+OnBootSec=10s
+OnUnitActiveSec=10s
+AccuracySec=1ms
+
+[Install]
+WantedBy=timers.target
