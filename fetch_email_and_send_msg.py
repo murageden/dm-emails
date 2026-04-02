@@ -1,3 +1,4 @@
+import html
 import os
 import requests
 from google.oauth2.credentials import Credentials
@@ -42,22 +43,31 @@ def fetch_new_emails():
     results = service.users().messages().list(userId='me', q='is:unread').execute()
     messages = results.get('messages', [])
 
-    print(f"Found {len(messages)} new emails.")
+    how_many = len(messages)
+    count_text = "Emails" if how_many >= 2 else "Email"
+
+    print(f"Found {how_many} New {count_text}.")
+
+    count = 1
 
     for msg in messages:
         txt = service.users().messages().get(userId='me', id=msg['id']).execute()
-        
+
         # Simple snippet extraction
-        snippet = txt.get('snippet', 'No content')
+        encoded_snippet = txt.get('snippet', 'No Content')
+        snippet = html.unescape(encoded_snippet)
+
         subject = next(h['value'] for h in txt['payload']['headers'] if h['name'] == 'Subject')
-        
-        notification = f"{subject}\n\n{snippet}"
-        print(f"\n {notification} \n")
-        print(f"Sending to IG: {subject}")
+        from_who = next(h['value'] for h in txt['payload']['headers'] if h['name'] == 'From')
+        reply_to = next((h['value'] for h in txt['payload']['headers'] if h['name'] == 'Reply-To'), "No Reply-To address")
+        notification = f"From: {from_who}\n\nReply-To: {reply_to}\n\n{subject}\n\n{snippet}"
         
         status = send_instagram_dm(notification)
-        print(f"Instagram DM response: {status}")
-        
+        id = status.get('recipient_id', 'Unknown')
+        dm_count_text = "DMs" if count >= 2 else "DM"
+        print(f"Sent {count} IG {dm_count_text} to Recipient GID: {id}.")
+        count += 1
+
         # Mark as read so we don't resend
         service.users().messages().batchModify(
             userId='me', 
