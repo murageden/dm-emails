@@ -10,7 +10,7 @@ load_dotenv()
 
 # Configuration
 SCOPES = ['https://www.googleapis.com/auth/gmail.modify']
-ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
+ACCESS_TOKEN = os.getenv('SENDER_ACCESS_TOKEN')
 RECIPIENT_IG_USER_GID = os.getenv('RECIPIENT_IG_USER_GID')
 
 def get_gmail_service():
@@ -60,7 +60,7 @@ def fetch_new_emails():
         subject = next(h['value'] for h in txt['payload']['headers'] if h['name'] == 'Subject')
         from_who = next(h['value'] for h in txt['payload']['headers'] if h['name'] == 'From')
         reply_to = next((h['value'] for h in txt['payload']['headers'] if h['name'] == 'Reply-To'), "No Reply-To address")
-        notification = f"From: {from_who}\n\nReply-To: {reply_to}\n\n{subject}\n\n{snippet}"
+        notification = f"From: {from_who}\nReply-To: {reply_to}\n\n{subject}\n\n{snippet}"
         
         status = send_instagram_dm(notification)
         id = status.get('recipient_id', 'Unknown')

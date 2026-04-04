@@ -1,0 +1,6 @@
+[Unit]
+Description=My Outreach DM Sender Sends an Outreach IG DM to my Instagram Inbox Every 12 hours
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/outreach_job.sh

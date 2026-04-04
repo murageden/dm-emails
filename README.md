@@ -7,7 +7,7 @@ Not A.I, no-no. Just DM me, I'll show you 😊
 [Instagram DM](https://www.instagram.com/d3n00h/)
 
 ## APIs
-- [Google Cloud APIs]()
-- [Meta Business Developer APIs]()
+- [Google Cloud APIs](https://developers.google.com/apis-explorer)
+- [Meta Business Suite APIs](https://developers.facebook.com)
 
 Holla @ me [Here](mailto:muragemd@gmail.com) or just fork the project and work on it by yourself. All the best! 😊
